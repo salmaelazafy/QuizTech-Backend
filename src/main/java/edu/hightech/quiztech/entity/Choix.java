@@ -1,5 +1,7 @@
 package edu.hightech.quiztech.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +23,10 @@ public class Choix {
     private Boolean estCorrect = false;
 
     @ManyToOne
-    @JoinColumn(name = "question_qcm_id")
-    private QuestionQCM questionQCM;
+    @JoinColumn(name = "question_id")
+    private Question question;
+    
+    @OneToMany(mappedBy = "choix")
+    private List<ReponseEtudiant> reponses;
+    
 }

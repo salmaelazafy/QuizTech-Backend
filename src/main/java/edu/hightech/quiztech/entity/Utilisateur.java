@@ -36,7 +36,6 @@ public abstract class  Utilisateur {
 
     private LocalDate dateInscription;
 
-    private String status; 
 
     private LocalDateTime lastActivity;
 
@@ -47,8 +46,7 @@ public abstract class  Utilisateur {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
-    private List<Notification> notifications;
+   
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<AuditLog> auditLogs;

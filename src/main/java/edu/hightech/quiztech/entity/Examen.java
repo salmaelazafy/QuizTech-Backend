@@ -1,6 +1,6 @@
 package edu.hightech.quiztech.entity;
 
-import edu.hightech.quiztech.entity.enums.StatutExamen;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,16 +32,9 @@ public class Examen {
 
     private LocalDateTime dateFermeture;
 
-    private Boolean isPublished = false;
 
-    private String rejectionComment;
-
-    @Enumerated(EnumType.STRING)
-    private StatutExamen status;
-
-    @ManyToOne
-    @JoinColumn(name = "matiere_id")
-    private Matiere matiere;
+    
+  
 
     @ManyToOne
     @JoinColumn(name = "enseignant_id")

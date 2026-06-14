@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ChoixRepository extends JpaRepository<Choix, Long> {
 
-    List<Choix> findByQuestionQCMId(Long questionQCMId);
+    List<Choix> findByQuestionId(Long questionId);
 
 }

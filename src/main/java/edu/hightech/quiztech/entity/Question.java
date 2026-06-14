@@ -24,6 +24,11 @@ public abstract class Question {
     private Double note;
 
     private Integer ordre;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Choix> choix;
+
+    @Column(nullable = false)
+    private Integer nombreBonnesReponses;
 
     @ManyToOne
     @JoinColumn(name = "examen_id")

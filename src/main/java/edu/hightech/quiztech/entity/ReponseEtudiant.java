@@ -15,20 +15,11 @@ public class ReponseEtudiant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String reponseTexte;
-
-    private String choixSelectionne;
-
-    @Column(columnDefinition = "TEXT")
-    private String codeSource;
-
-    private String langage;
-
-    private Integer testsReussis;
-
-    private Integer testsTotaux;
-    
     private Double noteObtenue;
+    
+    @ManyToOne
+    @JoinColumn(name = "choix_id")
+    private Choix choix;
 
     @ManyToOne
     @JoinColumn(name = "submission_id")
