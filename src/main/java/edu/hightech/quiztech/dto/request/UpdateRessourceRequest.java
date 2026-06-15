@@ -1,5 +1,11 @@
 package edu.hightech.quiztech.dto.request;
 
-public class UpdateRessourceRequest {
+import lombok.Data;
 
+@Data
+public class UpdateRessourceRequest {
+    private String titre;
+    private String description;
+    private String fichier;
+    private Long classeId;
 }

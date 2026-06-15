@@ -1,5 +1,11 @@
 package edu.hightech.quiztech.dto.request;
 
-public class UpdateUserRequest {
+import lombok.Data;
 
+@Data
+public class UpdateUserRequest {
+    private String nomComplet;
+    private String photoProfil;
+    private Boolean forcePasswordChange;
+    private Long classeId;
 }

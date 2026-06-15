@@ -1,5 +1,8 @@
 package edu.hightech.quiztech.dto.request;
 
-public class CreateClasseRequest {
+import lombok.Data;
 
+@Data
+public class CreateClasseRequest {
+    private String nomClasse;
 }

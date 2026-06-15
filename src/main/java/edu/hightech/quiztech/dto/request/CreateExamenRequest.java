@@ -1,5 +1,17 @@
 package edu.hightech.quiztech.dto.request;
 
-public class CreateExamenRequest {
+import lombok.Data;
+import java.time.LocalDateTime;
+import java.util.List;
 
+@Data
+public class CreateExamenRequest {
+    private String titre;
+    private String description;
+    private Integer duree;
+    private Integer coefficient;
+    private LocalDateTime dateOuverture;
+    private LocalDateTime dateFermeture;
+    private Long enseignantId;
+    private List<Long> classeIds;
 }
