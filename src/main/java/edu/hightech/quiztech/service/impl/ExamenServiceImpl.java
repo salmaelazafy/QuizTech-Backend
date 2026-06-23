@@ -37,14 +37,6 @@ public class ExamenServiceImpl implements ExamenService {
         examen.setDateOuverture(request.getDateOuverture());
         examen.setDateFermeture(request.getDateFermeture());
 
-        if (request.getEnseignantId() != null) {
-            Utilisateur utilisateur = utilisateurRepository.findById(request.getEnseignantId())
-                    .orElseThrow(() -> new RuntimeException("Enseignant introuvable"));
-            if (utilisateur instanceof Enseignant) {
-                examen.setEnseignant((Enseignant) utilisateur);
-            }
-        }
-
         if (request.getClasseIds() != null && !request.getClasseIds().isEmpty()) {
             List<Classe> classes = classeRepository.findAllById(request.getClasseIds());
             examen.setClasses(classes);

@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public abstract class Question {
+public  class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

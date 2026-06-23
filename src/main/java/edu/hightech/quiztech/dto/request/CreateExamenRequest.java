@@ -12,6 +12,5 @@ public class CreateExamenRequest {
     private Integer coefficient;
     private LocalDateTime dateOuverture;
     private LocalDateTime dateFermeture;
-    private Long enseignantId;
     private List<Long> classeIds;
 }

@@ -45,7 +45,7 @@ public class AuditServiceImpl implements AuditService {
             res.setId(log.getId());
             res.setAction(log.getAction());
             res.setDetails(log.getDetails());
-            res.setTimestamp(log.getDateAction());
+            res.setDateAction(log.getDateAction());
 
             if (log.getUtilisateur() != null) {
                 res.setUtilisateurId(log.getUtilisateur().getId());

@@ -1,5 +1,6 @@
 package edu.hightech.quiztech.service.impl;
 
+import edu.hightech.quiztech.dto.request.SubmissionRequest;
 import edu.hightech.quiztech.dto.response.SubmissionResponse;
 import edu.hightech.quiztech.entity.Submission;
 import edu.hightech.quiztech.repository.SubmissionRepository;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SubmissionServiceImpl {
+public class SubmissionServiceImpl implements SoumissionService {
 
     private final SubmissionRepository submissionRepository;
 
@@ -53,4 +54,22 @@ public class SubmissionServiceImpl {
 
         return res;
     }
+
+	@Override
+	public SubmissionResponse soumettreExamen(SubmissionRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SubmissionResponse getSoumissionById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SubmissionResponse> getSoumissionsByEtudiant(Long etudiantId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
