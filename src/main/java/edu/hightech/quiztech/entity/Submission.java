@@ -28,8 +28,6 @@ public class Submission {
 
     private Boolean isGraded = false;
 
-    private Integer antiFraudIncidentCount;
-
     @Column(columnDefinition = "TEXT")
     private String antiFraudDetails;
 

@@ -6,7 +6,7 @@ import lombok.*;
 	@DiscriminatorValue("ADMIN")
 	@Getter @Setter @NoArgsConstructor
 		 
-public class Admin  extends Utilisateur{
+public class Admin extends Utilisateur {
 	
 	
 }

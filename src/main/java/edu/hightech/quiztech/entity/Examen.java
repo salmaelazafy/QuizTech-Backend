@@ -32,10 +32,6 @@ public class Examen {
 
     private LocalDateTime dateFermeture;
 
-
-    
-  
-
     @ManyToOne
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
