@@ -1,6 +1,5 @@
 package edu.hightech.quiztech.service.impl;
 
-import edu.hightech.quiztech.dto.request.SubmissionRequest;
 import edu.hightech.quiztech.dto.response.SubmissionResponse;
 import edu.hightech.quiztech.entity.Submission;
 import edu.hightech.quiztech.repository.SubmissionRepository;
@@ -14,62 +13,80 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SubmissionServiceImpl implements SoumissionService {
+public class SubmissionServiceImpl {
 
     private final SubmissionRepository submissionRepository;
 
+    @Override
+    @Transactional
+    public SubmissionResponse soumettreExamen(SubmissionRequest request) {
+
+        // TODO: Implémentation complète plus tard
+
+        Submission submission = new Submission();
+
+        Submission savedSubmission =
+                submissionRepository.save(submission);
+
+        return mapToResponse(savedSubmission);
+    }
+
+    @Override
     @Transactional(readOnly = true)
-    public SubmissionResponse getSubmissionById(Long id) {
+    public SubmissionResponse getSoumissionById(Long id) {
+
         Submission submission = submissionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Submission introuvable"));
+                .orElseThrow(() ->
+                        new RuntimeException("Submission introuvable"));
+
         return mapToResponse(submission);
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public List<SubmissionResponse> getSubmissionsByEtudiant(Long etudiantId) {
-        return submissionRepository.findAll().stream()
-                .filter(s -> s.getEtudiant() != null && s.getEtudiant().getId().equals(etudiantId))
+    public List<SubmissionResponse> getSoumissionsByEtudiant(
+            Long etudiantId) {
+
+        return submissionRepository.findAll()
+                .stream()
+                .filter(s ->
+                        s.getEtudiant() != null &&
+                                s.getEtudiant().getId().equals(etudiantId))
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
-    private SubmissionResponse mapToResponse(Submission submission) {
+    private SubmissionResponse mapToResponse(
+            Submission submission) {
+
         SubmissionResponse res = new SubmissionResponse();
+
         res.setId(submission.getId());
         res.setDateDebut(submission.getDateDebut());
         res.setDateSoumission(submission.getDateSoumission());
         res.setCommentaire(submission.getCommentaire());
         res.setIsGraded(submission.getIsGraded());
-     
-        res.setAntiFraudDetails(submission.getAntiFraudDetails());
+        res.setAntiFraudIncidentCount(
+                submission.getAntiFraudIncidentCount());
+        res.setAntiFraudDetails(
+                submission.getAntiFraudDetails());
         res.setNote(submission.getNote());
+
         if (submission.getEtudiant() != null) {
-            res.setEtudiantNom(submission.getEtudiant().getNomComplet());
+            res.setEtudiantNom(
+                    submission.getEtudiant().getNomComplet());
         }
 
         if (submission.getExamen() != null) {
-            res.setExamenTitre(submission.getExamen().getTitre()); }
+            res.setExamenTitre(
+                    submission.getExamen().getTitre());
+        }
 
-        res.setNombreReponses(submission.getReponses() != null ? submission.getReponses().size() : 0);
+        res.setNombreReponses(
+                submission.getReponses() != null
+                        ? submission.getReponses().size()
+                        : 0);
 
         return res;
     }
-
-	@Override
-	public SubmissionResponse soumettreExamen(SubmissionRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SubmissionResponse getSoumissionById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<SubmissionResponse> getSoumissionsByEtudiant(Long etudiantId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
