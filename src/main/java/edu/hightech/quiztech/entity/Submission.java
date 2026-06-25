@@ -28,9 +28,6 @@ public class Submission {
 
     private Boolean isGraded = false;
 
-    @Column(columnDefinition = "TEXT")
-    private String antiFraudDetails;
-
     @ManyToOne
     @JoinColumn(name = "etudiant_id")
     private Etudiant etudiant;

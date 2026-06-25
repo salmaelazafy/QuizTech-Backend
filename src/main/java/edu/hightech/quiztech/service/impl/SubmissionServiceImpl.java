@@ -1,9 +1,11 @@
 package edu.hightech.quiztech.service.impl;
 
+import edu.hightech.quiztech.dto.request.SubmissionRequest;
 import edu.hightech.quiztech.dto.response.SubmissionResponse;
+import edu.hightech.quiztech.entity.Etudiant;
 import edu.hightech.quiztech.entity.Submission;
 import edu.hightech.quiztech.repository.SubmissionRepository;
-import edu.hightech.quiztech.service.SoumissionService;
+import edu.hightech.quiztech.service.SubmissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SubmissionServiceImpl {
+public class SubmissionServiceImpl implements SubmissionService {
 
     private final SubmissionRepository submissionRepository;
 
@@ -21,12 +23,15 @@ public class SubmissionServiceImpl {
     @Transactional
     public SubmissionResponse soumettreExamen(SubmissionRequest request) {
 
-        // TODO: Implémentation complète plus tard
-
         Submission submission = new Submission();
 
-        Submission savedSubmission =
-                submissionRepository.save(submission);
+        // TODO : compléter l'implémentation plus tard
+        // submission.setEtudiant(...);
+        // submission.setExamen(...);
+        // submission.setDateDebut(...);
+        // submission.setDateSoumission(...);
+
+        Submission savedSubmission = submissionRepository.save(submission);
 
         return mapToResponse(savedSubmission);
     }
@@ -37,56 +42,54 @@ public class SubmissionServiceImpl {
 
         Submission submission = submissionRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Submission introuvable"));
+                        new RuntimeException("Submission introuvable avec l'id : " + id));
 
         return mapToResponse(submission);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<SubmissionResponse> getSoumissionsByEtudiant(
-            Long etudiantId) {
+    public List<SubmissionResponse> getSoumissionsByEtudiant(Long etudiantId) {
 
-        return submissionRepository.findAll()
+        return submissionRepository.findByEtudiantId(etudiantId)
                 .stream()
-                .filter(s ->
-                        s.getEtudiant() != null &&
-                                s.getEtudiant().getId().equals(etudiantId))
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
+    private SubmissionResponse mapToResponse(Submission submission) {
 
-    private SubmissionResponse mapToResponse(
-            Submission submission) {
+        SubmissionResponse response = new SubmissionResponse();
 
-        SubmissionResponse res = new SubmissionResponse();
+        response.setId(submission.getId());
+        response.setDateDebut(submission.getDateDebut());
+        response.setDateSoumission(submission.getDateSoumission());
+        response.setCommentaire(submission.getCommentaire());
+        response.setNote(submission.getNote());
 
-        res.setId(submission.getId());
-        res.setDateDebut(submission.getDateDebut());
-        res.setDateSoumission(submission.getDateSoumission());
-        res.setCommentaire(submission.getCommentaire());
-        res.setIsGraded(submission.getIsGraded());
-        res.setAntiFraudIncidentCount(
-                submission.getAntiFraudIncidentCount());
-        res.setAntiFraudDetails(
-                submission.getAntiFraudDetails());
-        res.setNote(submission.getNote());
+        response.setIsGraded(
+                submission.getIsGraded() != null
+                        ? submission.getIsGraded()
+                        : false
+        );
 
         if (submission.getEtudiant() != null) {
-            res.setEtudiantNom(
-                    submission.getEtudiant().getNomComplet());
+            response.setEtudiantNom(
+                    submission.getEtudiant().getNomComplet()
+            );
         }
 
         if (submission.getExamen() != null) {
-            res.setExamenTitre(
-                    submission.getExamen().getTitre());
+            response.setExamenTitre(
+                    submission.getExamen().getTitre()
+            );
         }
 
-        res.setNombreReponses(
+        response.setNombreReponses(
                 submission.getReponses() != null
                         ? submission.getReponses().size()
-                        : 0);
+                        : 0
+        );
 
-        return res;
+        return response;
     }
 }

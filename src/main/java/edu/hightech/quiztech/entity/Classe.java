@@ -26,7 +26,8 @@ public class Classe {
     @OneToMany(mappedBy = "classe")
     private List<Etudiant> etudiants;
 
-
+    @ManyToMany(mappedBy = "classes")
+    private List<Enseignant> enseignants;
 
     @ManyToMany(mappedBy = "classes")
     private List<Examen> examens;

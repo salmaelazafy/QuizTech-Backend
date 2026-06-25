@@ -12,12 +12,17 @@ import java.util.List;
 
 public class Enseignant extends Utilisateur {
 
-
-
     @OneToMany(mappedBy = "enseignant")
     private List<Examen> examens;
 
     @OneToMany(mappedBy = "enseignant")
     private List<RessourcePedagogique> ressources;
 
-   }
+    @ManyToMany
+    @JoinTable(
+        name = "enseignant_classes",
+        joinColumns = @JoinColumn(name = "enseignant_id"),
+        inverseJoinColumns = @JoinColumn(name = "classe_id")
+    )
+    private List<Classe> classes;
+}

@@ -63,7 +63,7 @@ public class CorrectionServiceImpl implements CorrectionService {
         res.setDateSoumission(submission.getDateSoumission());
         res.setCommentaire(submission.getCommentaire());
         res.setIsGraded(submission.getIsGraded());
-        res.setAntiFraudDetails(submission.getAntiFraudDetails());
+       
         res.setNote(submission.getNote());
 
         if (submission.getEtudiant() != null) {

@@ -18,7 +18,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type_utilisateur")
 
-public abstract class  Utilisateur {
+public abstract class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -36,7 +36,6 @@ public abstract class  Utilisateur {
 
     private LocalDate dateInscription;
 
-
     private LocalDateTime lastActivity;
 
     private Boolean forcePasswordChange = false;
@@ -46,8 +45,13 @@ public abstract class  Utilisateur {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-   
+    @ManyToOne
+    @JoinColumn(name = "cree_par_admin_id")
+    private Admin creePar;
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<AuditLog> auditLogs;
+
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    private List<Notification> notifications;
 }

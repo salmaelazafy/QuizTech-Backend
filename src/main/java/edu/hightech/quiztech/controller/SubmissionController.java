@@ -2,7 +2,7 @@ package edu.hightech.quiztech.controller;
 
 import edu.hightech.quiztech.dto.request.SubmissionRequest;
 import edu.hightech.quiztech.dto.response.SubmissionResponse;
-import edu.hightech.quiztech.service.SoumissionService;
+import edu.hightech.quiztech.service.SubmissionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("/api/soumissions")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-public class SoumissionController {
+public class SubmissionController {
 
-    private final SoumissionService soumissionService;
+    private final SubmissionService soumissionService;
 
     @PostMapping
     public ResponseEntity<SubmissionResponse> soumettreExamen(
